@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Umbrella Customizer</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .color-selector {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .color-selector h2 {
+      text-align: center;
+    }
+
+    .color-selector ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .color-selector ul li {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      border: 1px solid black;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    .color-selector ul li.active {
+      background-color: #ccc;
+    }
+
+    .logo-uploader {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .logo-uploader h2 {
+      text-align: center;
+    }
+
+    .logo-uploader input {
+      width: 100%;
+      border: 1px solid black;
+    }
+
+    .preview {
+      width: 100%;
+      height: 100px;
+    }
+
+    .preview h2 {
+      text-align: center;
+    }
+
+    .preview img {
+      width: 100%;
+    }
+
+    button {
+      margin-top: 10px;
+      background-color: #ccc;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Umbrella Customizer</h1>
+
+  <div class="color-selector">
+    <h2>Color</h2>
+    <ul>
+      <li><a href="#">Pink</a></li>
+      <li><a href="#">Blue</a></li>
+      <li><a href="#">Yellow</a></li>
+    </ul>
+  </div>
+
+  <div class="logo-uploader">
+    <h2>Logo</h2>
+    <input type="file" name="logo">
+  </div>
+
+  <div class="preview">
+    <h2>Preview</h2>
+    <img src="https://drive.google.com/drive/folders/1tUatmHWY7c8TV-SsErtM-Htmj2PUS4pl" alt="Umbrella">
+  </div>
+
+  <button type="submit">Customize</button>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var colorSelector = $(".color-selector");
+
+      var logoUploader = $(".logo-uploader");
+
+      var preview = $(".preview");
+
+      colorSelector.on("click", "li", function() {
+        var activeColor = $(this).addClass("active").siblings().removeClass("active");
+        preview.css("background-color", activeColor.css("color"));
+      });
+      logoUploader.on("change", function() {
+        var logoFile = this.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          preview.find("img").attr("src", e.target.result);
+        };
+        reader.readAsDataURL(logoFile);
+      });
+    });
+  </script>
+</body>
+</html>

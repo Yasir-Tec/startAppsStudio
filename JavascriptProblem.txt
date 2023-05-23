@@ -1,0 +1,27 @@
+function CountMinTotalPlanes(dataSet) {
+  const total = dataSet.length;
+  let TotalPlanes = 1; 
+  let FuelAvailable = dataSet[0]; 
+  
+  for (let i = 1; i < total; i++) {
+    FuelAvailable -= 1; 
+    
+    // hire a new plane if dont have enough fuel
+    if (FuelAvailable < 0) {
+      const remainingdataSet = dataSet.slice(i);
+      const maxFuel = Math.max(...remainingdataSet);
+      if (maxFuel === 0) {
+        return -1;
+      }
+      TotalPlanes += 1;
+      FuelAvailable = maxFuel - 1; 
+    }
+  }  
+  return TotalPlanes;
+}
+// Below are two example
+const example1 = [2, 1, 2, 3, 1];
+console.log(CountMinTotalPlanes(example1)); 
+
+const example2 = [1, 6, 3, 4, 5, 0, 0, 0, 6];
+console.log(CountMinTotalPlanes(example2));

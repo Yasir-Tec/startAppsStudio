@@ -1,0 +1,26 @@
+The algorithm follows a greedy approach
+This algorithm has a time complexity of O(N)
+
+Start ->
+Step1 - Initialize required variables.
+     total: It will Store the total number of inputs in the input array.
+   - planes: Start with one plane at the first airport
+   - FuelAvailable: Fuel units of the current plane.
+
+Step - 2. Iterate through the input array starting from the second airport (index 1) up to the last airport (index `total - 1`):
+            - Subtract 1 from `FuelAvailable` to account for the fuel needed to fly to the next airport.
+
+Step - 3. Check if the current plane has enough fuel to reach the next airport:
+			Check Condition :
+					- If `FuelAvailable` is less than 0, it means we don't have enough fuel to reach the next airport using the current plane.
+                          In this case, we need to hire a new plane with maximum fuel capacity available from the remaining airports.
+						
+Step - 4. Check condition if need to hire a new plane:
+   - Create a subarray `remainingdataSet` from the input array starting from the current airport (index `i`) to the last airport.
+   - Find the maximum fuel capacity from the `remainingdataSet` array using the `Math.max(...remainingdataSet)` function.
+   - If the maximum fuel capacity is 0, it means there are no planes available to reach the last airport. In this case, return -1.
+   - Increment the `TotalPlanes` count by 1 to represent hiring a new plane.
+   - Set the `currentFuel` to `maxFuel - 1`, subtracting 1 for the fuel needed to fly to the next airport.
+
+Step - 5. After iterating through all the airports, return the `Total planes` count, which represents the minimum number of planes needed to reach the last airport.
+End ->
